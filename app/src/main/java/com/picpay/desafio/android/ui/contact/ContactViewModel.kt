@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.picpay.desafio.android.data.entity.User
+import com.picpay.desafio.android.data.remote.entity.User
 import com.picpay.desafio.android.data.repository.UserRepository
 import kotlinx.coroutines.launch
 

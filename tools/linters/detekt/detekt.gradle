@@ -1,0 +1,17 @@
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+detekt {
+    toolVersion = "$detekt_version"
+
+    config = files("${project.rootDir}/tools/linters/detekt/default-detekt-config.yml")
+    buildUponDefaultConfig = true
+    failFast = false
+    parallel = true
+
+    reports {
+        xml {
+            enabled = true
+            destination = file("${project.buildDir}/reports/detekt.xml")
+        }
+    }
+}

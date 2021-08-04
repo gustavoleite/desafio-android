@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.databinding.ContactFragmentBinding
-import com.picpay.desafio.android.network.Status.*
+import com.picpay.desafio.android.network.Status.ERROR
+import com.picpay.desafio.android.network.Status.LOADING
+import com.picpay.desafio.android.network.Status.SUCCESS
 import org.koin.android.ext.android.inject
 
 class ContactFragment : Fragment() {
@@ -53,24 +55,27 @@ class ContactFragment : Fragment() {
     }
 
     private fun setUpObserver() {
-        viewModel.users.observe(viewLifecycleOwner, {
+        viewModel.users.observe(
+            viewLifecycleOwner,
+            {
 
-            it?.let { resource ->
-                when (resource.status) {
-                    SUCCESS -> {
-                        binding.contactLoader.visibility = View.GONE
-                        resource.data?.let { users -> adapter.users = users }
-                    }
-                    ERROR -> {
-                        binding.contactLoader.visibility = View.GONE
-                        showErrorMessage(getString(R.string.default_request_error_message))
-                    }
-                    LOADING -> {
-                        binding.contactLoader.visibility = View.VISIBLE
+                it?.let { resource ->
+                    when (resource.status) {
+                        SUCCESS -> {
+                            binding.contactLoader.visibility = View.GONE
+                            resource.data?.let { users -> adapter.users = users }
+                        }
+                        ERROR -> {
+                            binding.contactLoader.visibility = View.GONE
+                            showErrorMessage(getString(R.string.default_request_error_message))
+                        }
+                        LOADING -> {
+                            binding.contactLoader.visibility = View.VISIBLE
+                        }
                     }
                 }
             }
-        })
+        )
     }
 
     private fun showErrorMessage(message: String) {

@@ -23,6 +23,8 @@ buildscript {
         test_runner_version = '1.4.0'
         espresso_version = '3.4.0'
 
+        detekt_version = '1.15.0'
+
         koin_version = "2.2.3"
         dagger_version = "2.23.2"
         lifecycle_version = "2.3.1"
@@ -40,6 +42,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -51,6 +54,10 @@ allprojects {
         jcenter()
 
     }
+}
+
+subprojects {
+    apply from: "$rootDir/tools/linters.gradle"
 }
 
 task clean(type: Delete) {

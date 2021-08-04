@@ -1,22 +1,14 @@
 package com.picpay.desafio.android.ui.contact
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.picpay.desafio.android.data.remote.entity.User
-import com.picpay.desafio.android.data.repository.UserRepository
-import kotlinx.coroutines.launch
+import com.picpay.desafio.android.data.usecase.GetUsersUseCase
+import com.picpay.desafio.android.network.Resource
 
-class ContactViewModel(private val userRepository: UserRepository) : ViewModel() {
+class ContactViewModel(private val getUsers: GetUsersUseCase) : ViewModel() {
 
-    private val _users = MutableLiveData<List<User>>()
-    val users: LiveData<List<User>>
-        get() = _users
-
-    fun fetchContacts() {
-        viewModelScope.launch {
-            _users.postValue(userRepository.getAll())
-        }
-    }
+    val users: LiveData<Resource<List<User>>>
+        get() = getUsers.execute(withScope = viewModelScope)
 }

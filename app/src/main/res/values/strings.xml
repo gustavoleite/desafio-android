@@ -4,4 +4,7 @@
     <string name="error">Ocorreu um erro. Tente novamente.</string>
     <string name="contact_fragment_name">Contato</string>
 
+    <string name="default_request_error_message">Ops, algo inesperado aconteceu</string>
+    <string name="try_again">Repetir</string>
+
 </resources>

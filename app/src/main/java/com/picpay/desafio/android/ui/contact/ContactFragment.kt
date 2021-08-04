@@ -6,16 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.databinding.ContactFragmentBinding
+import com.picpay.desafio.android.network.Status.*
 import org.koin.android.ext.android.inject
 
-class ContactFragment : Fragment(R.layout.contact_fragment) {
+class ContactFragment : Fragment() {
 
     private val viewModel: ContactViewModel by inject()
     private val adapter: UserListAdapter by inject()
 
     private var _binding: ContactFragmentBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -40,7 +43,6 @@ class ContactFragment : Fragment(R.layout.contact_fragment) {
 
         setUpRecycler()
         setUpObserver()
-        viewModel.fetchContacts()
     }
 
     private fun setUpRecycler() {
@@ -52,7 +54,29 @@ class ContactFragment : Fragment(R.layout.contact_fragment) {
 
     private fun setUpObserver() {
         viewModel.users.observe(viewLifecycleOwner, {
-            adapter.users = it
+
+            it?.let { resource ->
+                when (resource.status) {
+                    SUCCESS -> {
+                        binding.contactLoader.visibility = View.GONE
+                        resource.data?.let { users -> adapter.users = users }
+                    }
+                    ERROR -> {
+                        binding.contactLoader.visibility = View.GONE
+                        showErrorMessage(getString(R.string.default_request_error_message))
+                    }
+                    LOADING -> {
+                        binding.contactLoader.visibility = View.VISIBLE
+                    }
+                }
+            }
         })
+    }
+
+    private fun showErrorMessage(message: String) {
+        Snackbar
+            .make(binding.root, message, Snackbar.LENGTH_LONG)
+            .setAction(R.string.try_again) { setUpObserver() }
+            .show()
     }
 }

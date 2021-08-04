@@ -9,7 +9,7 @@ import com.picpay.desafio.android.data.local.dto.UserDTO
 interface UserDao {
 
     @Insert
-    fun save(products: List<UserDTO>)
+    fun saveAll(products: List<UserDTO>)
 
     @Query("SELECT * FROM user")
     fun getAll(): List<UserDTO>

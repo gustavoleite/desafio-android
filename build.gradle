@@ -22,7 +22,7 @@ buildscript {
 
         test_runner_version = '1.4.0'
         espresso_version = '3.4.0'
-
+        mockk_version = '1.11.0'
         detekt_version = '1.15.0'
 
         koin_version = "2.2.3"

@@ -19,7 +19,7 @@ class GetUsersUseCase(private val repository: UserRepository, private val dao: U
 
             emit(
                 if (localData.isEmpty()) {
-                    repository.getAll().run {
+                    repository.getAllUsers().run {
                         dao.saveAll(UserConverter.toUserDtoList(this))
                         Resource.success(this)
                     }

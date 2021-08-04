@@ -6,10 +6,12 @@ import com.picpay.desafio.android.data.remote.PicPayService
 import com.picpay.desafio.android.data.remote.repository.UserRepository
 import com.picpay.desafio.android.data.remote.repository.UserRepositoryImpl
 import com.picpay.desafio.android.data.usecase.GetUsersUseCase
+import com.picpay.desafio.android.network.OkHttpBuilder
 import com.picpay.desafio.android.network.RetrofitBuilder
 import com.picpay.desafio.android.ui.contact.ContactViewModel
 import com.picpay.desafio.android.ui.contact.UserListAdapter
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -17,8 +19,8 @@ import org.koin.dsl.module
 private val networkModule = module {
 
     single<PicPayService> {
-        RetrofitBuilder.buildRetrofitInstance(
-            OkHttpClient.Builder().build()
+        RetrofitBuilder.getInstance(
+            OkHttpBuilder.getInstance()
         ).create(PicPayService::class.java)
     }
 }

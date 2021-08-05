@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.network
+package com.picpay.desafio.android.data.remote.network
 
 import com.picpay.desafio.android.BuildConfig
 import okhttp3.OkHttpClient

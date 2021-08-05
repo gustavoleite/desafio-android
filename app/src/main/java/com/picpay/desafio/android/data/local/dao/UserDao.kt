@@ -3,14 +3,14 @@ package com.picpay.desafio.android.data.local.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.picpay.desafio.android.data.local.dto.UserDTO
+import com.picpay.desafio.android.data.local.entity.UserEntity
 
 @Dao
 interface UserDao {
 
     @Insert
-    fun saveAll(products: List<UserDTO>)
+    suspend fun saveAll(products: List<UserEntity>)
 
     @Query("SELECT * FROM user")
-    fun getAll(): List<UserDTO>
+    suspend fun getAll(): List<UserEntity>
 }

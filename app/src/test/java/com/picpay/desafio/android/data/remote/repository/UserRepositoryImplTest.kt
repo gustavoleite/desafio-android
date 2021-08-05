@@ -1,6 +1,6 @@
 package com.picpay.desafio.android.data.remote.repository
 
-import com.picpay.desafio.android.data.converter.UserMock
+import com.picpay.desafio.android.UserMock
 import com.picpay.desafio.android.data.remote.PicPayService
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -20,7 +20,7 @@ class UserRepositoryImplTest {
     @Test
     fun whenGetAllUsers_mustReturnUserListFromService() {
         runBlockingTest {
-            sut.getAllUsers()
+            sut.getAll()
         }
 
         coVerify {

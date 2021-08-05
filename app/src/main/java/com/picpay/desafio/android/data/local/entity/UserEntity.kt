@@ -1,11 +1,11 @@
-package com.picpay.desafio.android.data.local.dto
+package com.picpay.desafio.android.data.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "user")
-data class UserDTO(
+data class UserEntity(
     @PrimaryKey
     @ColumnInfo val id: Int,
     @ColumnInfo val img: String,

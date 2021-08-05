@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.network
+package com.picpay.desafio.android.data.remote.network
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 

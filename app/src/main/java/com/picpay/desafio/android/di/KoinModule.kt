@@ -1,17 +1,17 @@
 package com.picpay.desafio.android.di
 
 import androidx.room.Room
-import com.picpay.desafio.android.data.local.AppDb
+import com.picpay.desafio.android.data.converter.UserConverter
+import com.picpay.desafio.android.data.local.db.AppDataBase
 import com.picpay.desafio.android.data.remote.PicPayService
-import com.picpay.desafio.android.data.remote.repository.UserRepository
+import com.picpay.desafio.android.data.remote.network.OkHttpBuilder
+import com.picpay.desafio.android.data.remote.network.RetrofitBuilder
 import com.picpay.desafio.android.data.remote.repository.UserRepositoryImpl
-import com.picpay.desafio.android.data.usecase.GetUsersUseCase
-import com.picpay.desafio.android.network.OkHttpBuilder
-import com.picpay.desafio.android.network.RetrofitBuilder
+import com.picpay.desafio.android.domain.user.repository.UserRepository
+import com.picpay.desafio.android.domain.user.usecase.GetUsersUseCase
+import com.picpay.desafio.android.domain.user.usecase.GetUsersUseCaseImpl
 import com.picpay.desafio.android.ui.contact.ContactViewModel
 import com.picpay.desafio.android.ui.contact.UserListAdapter
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -23,6 +23,8 @@ private val networkModule = module {
             OkHttpBuilder.getInstance()
         ).create(PicPayService::class.java)
     }
+
+    factory { UserConverter() }
 }
 
 private val adapterModule = module {
@@ -31,7 +33,13 @@ private val adapterModule = module {
 
 private val dataModule = module {
     single<UserRepository> { UserRepositoryImpl(service = get()) }
-    single { GetUsersUseCase(repository = get(), dao = get()) }
+    single<GetUsersUseCase> {
+        GetUsersUseCaseImpl(
+            repository = get(),
+            dao = get(),
+            converter = get()
+        )
+    }
 }
 
 private val viewModelModule = module {
@@ -44,13 +52,13 @@ private val roomModule = module {
         Room
             .inMemoryDatabaseBuilder(
                 androidApplication(),
-                AppDb::class.java
+                AppDataBase::class.java
             )
             .build()
     }
 
     single {
-        get<AppDb>().userDao()
+        get<AppDataBase>().userDao()
     }
 }
 

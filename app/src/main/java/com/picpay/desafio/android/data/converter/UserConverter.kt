@@ -1,29 +1,41 @@
 package com.picpay.desafio.android.data.converter
 
-import com.picpay.desafio.android.data.local.dto.UserDTO
-import com.picpay.desafio.android.data.remote.entity.User
+import com.picpay.desafio.android.data.local.entity.UserEntity
+import com.picpay.desafio.android.data.remote.output.UserOutput
+import com.picpay.desafio.android.domain.user.model.User
 
-object UserConverter {
+class UserConverter {
 
-    fun toUser(dto: UserDTO) = User(
-        id = dto.id,
-        img = dto.img,
-        name = dto.name,
-        username = dto.username
+    fun toUser(output: UserOutput) = User(
+        id = output.id,
+        img = output.img,
+        name = output.name,
+        username = output.username
     )
 
-    fun toUserDto(user: User) = UserDTO(
-        id = user.id,
-        img = user.img,
-        name = user.name,
-        username = user.username
+    fun toUserOutput(entity: UserEntity) = UserOutput(
+        id = entity.id,
+        img = entity.img,
+        name = entity.name,
+        username = entity.username
     )
 
-    fun toUserList(dtoList: List<UserDTO>) = dtoList.map {
+    fun toUserEntity(output: UserOutput) = UserEntity(
+        id = output.id,
+        img = output.img,
+        name = output.name,
+        username = output.username
+    )
+
+    fun toUserList(outputList: List<UserOutput>) = outputList.map {
         toUser(it)
     }
 
-    fun toUserDtoList(userList: List<User>) = userList.map {
-        toUserDto(it)
+    fun toUserOutputList(entityList: List<UserEntity>) = entityList.map {
+        toUserOutput(it)
+    }
+
+    fun toUserEntityList(outputList: List<UserOutput>) = outputList.map {
+        toUserEntity(it)
     }
 }

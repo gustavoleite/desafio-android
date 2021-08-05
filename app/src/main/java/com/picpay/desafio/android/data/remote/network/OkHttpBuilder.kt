@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.network
+package com.picpay.desafio.android.data.remote.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

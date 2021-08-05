@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
-class UserDaoTest {
+class AppDataBaseTest {
 
     private val testDispatcher = TestCoroutineDispatcher()
     private val testScope = TestCoroutineScope(testDispatcher)
@@ -29,7 +29,6 @@ class UserDaoTest {
         .setQueryExecutor(testDispatcher.asExecutor())
         .build()
         .userDao()
-
 
     @ExperimentalCoroutinesApi
     @Test

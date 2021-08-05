@@ -12,7 +12,7 @@ import org.junit.Test
 class UserRepositoryImplTest {
 
     private val mockService = mockk<PicPayService> {
-        coEvery { getUsers() } returns UserMock.mockUserList()
+        coEvery { getUsers() } returns UserMock.mockUserOutputList()
     }
     private val sut = UserRepositoryImpl(mockService)
 

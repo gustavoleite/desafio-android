@@ -13,13 +13,6 @@ class UserConverter {
         username = output.username
     )
 
-    fun toUserOutput(entity: UserEntity) = UserOutput(
-        id = entity.id,
-        img = entity.img,
-        name = entity.name,
-        username = entity.username
-    )
-
     fun toUserEntity(output: UserOutput) = UserEntity(
         id = output.id,
         img = output.img,
@@ -27,15 +20,22 @@ class UserConverter {
         username = output.username
     )
 
+    fun toUserOutput(entity: UserEntity) = UserOutput(
+        id = entity.id,
+        img = entity.img,
+        name = entity.name,
+        username = entity.username
+    )
+
     fun toUserList(outputList: List<UserOutput>) = outputList.map {
         toUser(it)
     }
 
-    fun toUserOutputList(entityList: List<UserEntity>) = entityList.map {
-        toUserOutput(it)
-    }
-
     fun toUserEntityList(outputList: List<UserOutput>) = outputList.map {
         toUserEntity(it)
+    }
+
+    fun toUserOutputList(entityList: List<UserEntity>) = entityList.map {
+        toUserOutput(it)
     }
 }

@@ -6,31 +6,47 @@ import org.junit.Test
 
 class UserConverterTest {
 
-    @Test
-    fun givenUser_whenCallConverter_mustReturnUserDto() {
-        val userConverted = UserConverter.toUserEntity(UserMock.mockUserOne)
+    private val sut = UserConverter()
 
-        assertEquals(UserMock.mockUserDtoOne, userConverted)
+    @Test
+    fun givenUserOutput_whenCallConverter_mustReturnUser() {
+        val user = sut.toUser(UserMock.mockUserOutputOne)
+
+        assertEquals(UserMock.mockUserOne, user)
     }
 
     @Test
-    fun givenUserDto_whenCallConverter_mustReturnUser() {
-        val userConverted = UserConverter.toUserOutput(UserMock.mockUserDtoOne)
+    fun givenUserOutput_whenCallConverter_mustReturnUserEntity() {
+        val userEntity = sut.toUserEntity(UserMock.mockUserOutputOne)
 
-        assertEquals(UserMock.mockUserOne, userConverted)
+        assertEquals(UserMock.mockUserEntityOne, userEntity)
     }
 
     @Test
-    fun givenUserList_whenCallConverter_mustReturnUserDtoList() {
-        val userListConverted = UserConverter.toUserEntityList(UserMock.mockUserList())
+    fun givenUserEntity_whenCallConverter_mustReturnUserOutput() {
+        val userOutput = sut.toUserOutput(UserMock.mockUserEntityOne)
 
-        assertEquals(UserMock.mockUserDtoList(), userListConverted)
+        assertEquals(UserMock.mockUserOutputOne, userOutput)
     }
 
     @Test
-    fun givenUserDtoList_whenCallConverter_mustReturnUserList() {
-        val userConverted = UserConverter.toUserOutputList(UserMock.mockUserDtoList())
+    fun givenUserOutputList_whenCallConverter_mustReturnUserList() {
+        val userList = sut.toUserList(UserMock.mockUserOutputList())
 
-        assertEquals(UserMock.mockUserList(), userConverted)
+        assertEquals(UserMock.mockUserList(), userList)
+    }
+
+    @Test
+    fun givenUserOutputList_whenCallConverter_mustReturnUserEntityList() {
+        val userEntityList = sut.toUserEntityList(UserMock.mockUserOutputList())
+
+        assertEquals(UserMock.mockUserEntityList(), userEntityList)
+    }
+
+    @Test
+    fun givenUserEntityList_whenCallConverter_mustReturnUserOutputList() {
+        val userOutputList = sut.toUserOutputList(UserMock.mockUserEntityList())
+
+        assertEquals(UserMock.mockUserOutputList(), userOutputList)
     }
 }

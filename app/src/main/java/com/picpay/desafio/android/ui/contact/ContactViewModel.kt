@@ -1,6 +1,8 @@
 package com.picpay.desafio.android.ui.contact
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.picpay.desafio.android.data.remote.network.Resource
 import com.picpay.desafio.android.domain.user.model.User
 import com.picpay.desafio.android.domain.user.usecase.GetUsersUseCase

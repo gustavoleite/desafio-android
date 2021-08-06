@@ -15,9 +15,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.*
+import org.mockito.ArgumentCaptor
+import org.mockito.Captor
+import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.never
 import org.mockito.Mockito.times
+import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
 class GetUsersUseCaseImplTest {

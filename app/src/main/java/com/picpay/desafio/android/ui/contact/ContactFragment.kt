@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.data.remote.network.Resource
-import com.picpay.desafio.android.data.remote.network.Status.*
+import com.picpay.desafio.android.data.remote.network.Status.ERROR
+import com.picpay.desafio.android.data.remote.network.Status.LOADING
+import com.picpay.desafio.android.data.remote.network.Status.SUCCESS
 import com.picpay.desafio.android.databinding.ContactFragmentBinding
 import com.picpay.desafio.android.domain.user.model.User
 import org.koin.android.ext.android.inject
@@ -73,7 +75,6 @@ class ContactFragment : Fragment() {
                 binding.contactLoader.visibility = View.VISIBLE
             }
         }
-
     }
 
     private fun showErrorMessage(message: String) {

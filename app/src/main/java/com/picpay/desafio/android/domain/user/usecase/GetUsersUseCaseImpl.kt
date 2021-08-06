@@ -5,8 +5,7 @@ import com.picpay.desafio.android.data.converter.UserConverter
 import com.picpay.desafio.android.data.local.dao.UserDao
 import com.picpay.desafio.android.data.remote.network.Resource
 import com.picpay.desafio.android.domain.user.repository.UserRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import retrofit2.HttpException
 
 class GetUsersUseCaseImpl(
@@ -15,8 +14,8 @@ class GetUsersUseCaseImpl(
     private val repository: UserRepository
 ) : GetUsersUseCase {
 
-    override fun execute(withScope: CoroutineScope) =
-        liveData(withScope.coroutineContext + Dispatchers.IO) {
+    override fun execute(dispatcher: CoroutineDispatcher) =
+        liveData(dispatcher) {
             emit(Resource.loading(data = null))
 
             try {

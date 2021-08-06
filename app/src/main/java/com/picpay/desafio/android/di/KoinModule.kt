@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.picpay.desafio.android.BuildConfig
 import com.picpay.desafio.android.data.converter.UserConverter
 import com.picpay.desafio.android.data.local.db.AppDataBase
+import com.picpay.desafio.android.data.local.db.DATABASE
 import com.picpay.desafio.android.data.remote.PicPayService
 import com.picpay.desafio.android.data.remote.network.NetworkServiceFactory
 import com.picpay.desafio.android.data.remote.network.OkHttpBuilder
@@ -62,9 +63,10 @@ private val roomModule = module {
 
     single {
         Room
-            .inMemoryDatabaseBuilder(
+            .databaseBuilder(
                 androidApplication(),
-                AppDataBase::class.java
+                AppDataBase::class.java,
+                DATABASE
             )
             .build()
     }
